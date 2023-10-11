@@ -1,5 +1,5 @@
 # esp-python
-EVC Switchable Predictor based on python interface
+EVC Switchable Predictor based on Python & Flask WebServer
 <br>
 <br>
 Python Version<br>

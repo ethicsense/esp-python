@@ -1,0 +1,10 @@
+Flask==3.0.0
+imutils==0.5.4
+numpy==1.24.4
+opencv-contrib-python==4.8.1.78
+opencv-python==4.8.0.74
+torch==2.0.1
+torchvision==0.15.2
+tornado @ file:///Users/runner/miniforge3/conda-bld/tornado_1625488911690/work
+tqdm==4.65.0
+ultralytics==8.0.192

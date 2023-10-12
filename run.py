@@ -15,7 +15,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '--server_port',
         type=int,
-        default=7860
+        default=7999
     )
 
     app.run(host=args.server_name, port=args.server_port)

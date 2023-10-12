@@ -9,7 +9,7 @@ from model_manager import model_generator
 app = Flask(__name__)
 streamer = Streamer()
 
-@app.route('/pickModel', methods=['POST', 'GET'])
+@app.route('/', methods=['POST', 'GET'])
 def model_choice():
     return render_template('get_model.html')
 

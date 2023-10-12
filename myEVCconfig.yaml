@@ -38,7 +38,7 @@ owner: keti # host name
 
 ## AI 모델 정보
 # 모델 이름
-model_name: esp_test # your_model
+model_name: esp-test # your_model
 # 모델 버전
 version: "0.1"
 # 모델이 수행하는 태스크

@@ -15,7 +15,7 @@ RUN pip install --upgrade pip
 RUN pip install numpy
 RUN pip install imutils
 RUN pip install opencv-python
-RUN pip opencv-contrib-python
+RUN pip install opencv-contrib-python
 RUN pip3 install torch torchvision torchaudio
 RUN pip install ultralytics
 RUN pip install flask

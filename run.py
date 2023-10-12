@@ -17,5 +17,6 @@ if __name__ == "__main__":
         type=int,
         default=7999
     )
+    args=parser.parse_args()
 
     app.run(host=args.server_name, port=args.server_port)

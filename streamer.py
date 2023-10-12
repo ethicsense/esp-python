@@ -24,7 +24,7 @@ class Streamer:
         self.Q = Queue(maxsize=128)
         self.started = False
 
-    def run(self, model, url, src=0):
+    def run(self, model, url):
         self.model = model
         self.stop()
     

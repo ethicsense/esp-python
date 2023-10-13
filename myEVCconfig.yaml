@@ -4,18 +4,18 @@
 activation: gradio # "train" or "pred" or "gradio"
 # 클러스터 그룹명
 group:
-  # - &group1 keti_test_nuc
+  - &group1 keti_test_nuc
   # - &group2 keti_test_rpi
-  - &group3 keti_server
+  # - &group3 keti_server
 # 작업을 수행할 노드
 target:
-  # *group1:
-  # -   name: n02
-  #     ip: evc.re.kr
-  #     port: 33322
-  #     hw: intel_NUC
-  #     os: ubuntu
-  #     gpu: RTX2080
+  *group1:
+  -   name: n02
+      ip: evc.re.kr
+      port: 33322
+      hw: intel_NUC
+      os: ubuntu
+      gpu: RTX2080
 
   # *group2:
   # -   name: rpi6402
@@ -25,13 +25,13 @@ target:
   #     os: linux
   #     gpu: None
   
-  *group3:
-  -   name: p02
-      ip: evc.re.kr
-      port: 20023
-      hw: intel_13gen
-      os: ubuntu
-      gpu: RTX4090
+  # *group3:
+  # -   name: p02
+  #     ip: evc.re.kr
+  #     port: 20023
+  #     hw: intel_13gen
+  #     os: ubuntu
+  #     gpu: RTX4090
 
 # 노드 소유자 명
 owner: keti # host name
@@ -40,7 +40,7 @@ owner: keti # host name
 # 모델 이름
 model_name: esp-test # your_model
 # 모델 버전
-version: "0.3"
+version: "0.4"
 # 모델이 수행하는 태스크
 task: detection # i.e. classification, segmentation
 # 학습 혹은 추론 대상 데이터

@@ -1,7 +1,7 @@
 FROM python
 
-WORKDIR .
-ADD ./model.tar.gz ./home/
+WORKDIR /home
+ADD ./model.tar.gz .
 
 RUN apt-get update && apt-get install -y sudo
 RUN chmod +w /etc/sudoers

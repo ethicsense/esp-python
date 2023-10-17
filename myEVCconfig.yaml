@@ -40,7 +40,7 @@ owner: keti # host name
 # 모델 이름
 model_name: esp-test # your_model
 # 모델 버전
-version: "0.5"
+version: "0.6"
 # 모델이 수행하는 태스크
 task: detection # i.e. classification, segmentation
 # 학습 혹은 추론 대상 데이터

@@ -2,9 +2,15 @@
    <body>
    
       <form action = "/stream" method = "POST">
-          <p> Model Name <input type="text" name="Model Name" size=20 value="yolov8n.pt" /></p>
-          <p> Cam URL <input type="text" name = "Cam URL" size=60 value="rtsp://user1:ketiabcs@evc.re.kr:39091/h264Preview_01_main"/></p>
-          <p><input type = "submit" value = "submit" /></p>          
+         <h2>Select Model : </h2>
+         <select name="files" class="selectpicker form-control">
+            {% for fil in files[0:] %}
+            <option value="{{fil}}">{{fil}}</option>
+            {% endfor %}
+         </select>
+         <h2> Cam URL : </h2>
+         <p><input type="text" name="url" size=60 value="rtsp://user1:ketiabcs@evc.re.kr:39091/h264Preview_01_main"/></p>
+         <p><input type = "submit" value = "submit" /></p>
       </form>
       
    </body>

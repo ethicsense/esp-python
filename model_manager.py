@@ -20,9 +20,8 @@ class model_generator:
 
 class model_predictor(model_generator):
 
-    def __init__(self, model_type, model_name, url=None, video=None):
+    def __init__(self, model_type, model_name, video=None):
         super().__init__(model_type, model_name)
-        self.url = url
         self.video = video
 
     def video_infer(self):

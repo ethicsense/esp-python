@@ -1,7 +1,7 @@
 <html>
    <body>
    
-      <form action = "/stream" method = "POST">
+      <form method = "POST">
          <h2>Select Model : </h2>
          <select name="files" class="selectpicker form-control">
             {% for fil in files[0:] %}
@@ -9,8 +9,10 @@
             {% endfor %}
          </select>
          <h2> Cam URL : </h2>
-         <p><input type="text" name="url" size=60 value="rtsp://user1:ketiabcs@evc.re.kr:39091/h264Preview_01_main"/></p>
-         <p><input type = "submit" value = "submit" /></p>
+         <p><input type="text" name="url" size=60 value="http://keticmr.iptime.org:22080/WorkDevCarAI/carai/api/web/static/20231002_human.mp4"/></p>
+         <p><input type="submit" value="stream" onclick="javascript: form.action='/stream'" /></p>
+         <p><input type="submit" value="download video" onclick="javascript: form.action='/downloadVideo'" /></p>
+         <p><input type="submit" value="download prediction-log" onclick="javascript: form.action='/downloadLog'" /></p>
       </form>
       
    </body>

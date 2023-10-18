@@ -1,3 +1,5 @@
-# ignore logged datas
+# ignore testing logs, datas
 stream/
 video/
+logs/
+test.jpg

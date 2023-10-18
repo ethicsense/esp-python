@@ -8,6 +8,8 @@ from flask import redirect
 from streamer import Streamer
 from model_manager import model_generator
 
+from pandas import Series, DataFrame
+
 import os
 import cv2
 import time
@@ -95,7 +97,53 @@ def downloadVideo():
     )
 
 
-
+@app.route('/downloadLog', methods=['POST', 'GET'])
 def downloadLog():
+    model_name = str(request.form.get("files"))
+    modelGen = model_generator(model_name)
+    model = modelGen.get_model()
+    url = request.form["url"]
 
-    pass
+    cap = cv2.VideoCapture(url)
+    log = []
+
+    ret, frame = cap.read()
+
+    while True:
+        results = model(frame)
+        now = time.time()
+        
+        
+        for r in results:
+
+            if not r :
+                continue
+
+            tmp = r.boxes.data.cpu().numpy()
+
+            for t in tmp:
+                data = {}
+
+                data["timestamp"] = now
+                data["x1"] = t[0]
+                data["y1"] = t[1]
+                data["x2"] = t[2]
+                data["y2"] = t[3]
+                data["conf"] = t[4]
+                data["clss"] = t[5]
+
+                log.append(data)
+
+        ret, frame = cap.read()
+        
+        if not ret:
+            break
+    
+    path = os.getcwd() + "/logs/evclog.csv"
+    dflog = DataFrame(log)
+    dflog.to_csv(path)
+
+    return send_file(
+        path,
+        as_attachment=True
+    )

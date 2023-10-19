@@ -3,6 +3,5 @@ run.py \
 model_manager.py \
 server.py \
 streamer.py \
-video \
 templates \
 weights

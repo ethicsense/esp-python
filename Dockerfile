@@ -3,6 +3,10 @@ FROM python
 WORKDIR /home
 ADD ./model.tar.gz .
 
+RUN mkdir -p video
+RUN mkdir -p stream
+RUN mkdir -p logs
+
 RUN apt-get update && apt-get install -y sudo
 RUN chmod +w /etc/sudoers
 RUN echo 'irteam ALL=(ALL) NOPASSWD:ALL' | tee -a /etc/sudoers

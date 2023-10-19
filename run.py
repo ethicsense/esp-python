@@ -14,8 +14,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         '--server_port',
-        type=int,
-        default=7999
+        type=int
     )
     args=parser.parse_args()
 

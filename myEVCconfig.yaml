@@ -1,7 +1,7 @@
 ## configuration file for running EVC
 
 # EVC가 수행할 작업
-activation: gradio # "train" or "pred" or "gradio"
+# activation: gradio # "train" or "pred" or "gradio"
 # 클러스터 그룹명
 group:
   - &group1 keti_test_nuc

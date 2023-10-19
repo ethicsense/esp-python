@@ -13,6 +13,7 @@ target:
   -   name: n02
       ip: evc.re.kr
       port: 33322
+      app: "192.168.1.5:7999"
       hw: intel_NUC
       os: ubuntu
       gpu: RTX2080

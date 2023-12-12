@@ -2,6 +2,7 @@ FROM python
 
 WORKDIR /home
 ADD ./model.tar.gz .
+ADD ./weights .
 
 RUN mkdir -p video
 RUN mkdir -p stream

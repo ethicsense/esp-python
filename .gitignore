@@ -3,3 +3,6 @@ stream/
 video/
 logs/
 test.jpg
+
+# ignore weights (too big)
+weights/

@@ -2,11 +2,11 @@ FROM python
 
 WORKDIR /home
 ADD ./model.tar.gz .
-ADD ./weights .
 
 RUN mkdir -p video
 RUN mkdir -p stream
 RUN mkdir -p logs
+RUN mkdir -p weights
 
 RUN apt-get update && apt-get install -y sudo
 RUN chmod +w /etc/sudoers

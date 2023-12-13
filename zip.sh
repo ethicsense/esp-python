@@ -4,3 +4,4 @@ model_manager.py \
 server.py \
 streamer.py \
 templates \
+weights

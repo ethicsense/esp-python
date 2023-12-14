@@ -31,14 +31,47 @@ def stream():
     modelGen = model_generator(model_name)
     model = modelGen.get_model()
     url = request.form["url"]
+    gen = stream_gen(model, url)
 
     try:
         return Response(
-            stream_with_context(stream_gen(model, url)),
+            stream_with_context(gen),
             mimetype='multipart/x-mixed-replace; boundary=frame'
         )
     except Exception as e:
         print('[EVC]', 'stream error :', str(e))
+
+
+@app.route('/predImg', methods=['POST', 'GET'])
+def pred():
+    model_name = str(request.form.get("files"))
+    modelGen = model_generator(model_name)
+    model = modelGen.get_model()
+    url = request.form["url"]
+    gen = img_gen(model, url)
+
+    try:
+        return Response(
+            stream_with_context(gen),
+            mimetype='multipart/x-mixed-replace; boundary=frame'
+        )
+    except Exception as e:
+        print('[EVC]', 'stream error :', str(e))
+
+
+def img_gen(model, url):
+
+    streamer.pred(model, url)
+
+    frame = streamer.bytescode_img()
+    yield (
+        b'--frame\r\n'
+        b'Content-Type : image/jpeg\r\n\r\n' + frame + b'\r\n'
+    )
+    
+    if GeneratorExit:
+        print("[EVC]", "disconnected")
+        streamer.stop_img()
 
 
 def stream_gen(model, url):

@@ -1,4 +1,5 @@
 # ignore testing logs, datas
+static/
 stream/
 video/
 logs/

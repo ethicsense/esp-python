@@ -4,6 +4,7 @@ from flask import render_template
 from flask import Response
 from flask import stream_with_context
 from flask import send_file
+from flask import send_from_directory
 from flask import redirect
 from streamer import Streamer
 from model_manager import model_generator
@@ -14,9 +15,11 @@ import os
 import cv2
 import time
 
+IMAGE_FOLDER = os.path.join('static', 'img')
+
 app = Flask(__name__)
 streamer = Streamer()
-
+app.config['IMAGE_FOLDER'] = IMAGE_FOLDER
 
 @app.route('/', methods=['POST', 'GET'])
 def model_choice():
@@ -43,35 +46,18 @@ def stream():
 
 
 @app.route('/predImg', methods=['POST', 'GET'])
-def pred():
+def pred_img():
     model_name = str(request.form.get("files"))
     modelGen = model_generator(model_name)
     model = modelGen.get_model()
     url = request.form["url"]
-    gen = img_gen(model, url)
-
-    try:
-        return Response(
-            stream_with_context(gen),
-            mimetype='multipart/x-mixed-replace; boundary=frame'
-        )
-    except Exception as e:
-        print('[EVC]', 'stream error :', str(e))
-
-
-def img_gen(model, url):
-
-    streamer.pred(model, url)
-
-    frame = streamer.bytescode_img()
-    yield (
-        b'--frame\r\n'
-        b'Content-Type : image/jpeg\r\n\r\n' + frame + b'\r\n'
-    )
     
-    if GeneratorExit:
-        print("[EVC]", "disconnected")
-        streamer.stop_img()
+    filename = streamer.image_prediction(model, url)
+    full_fname = os.path.join(app.config["IMAGE_FOLDER"], filename)
+
+    return render_template("image_predict_page.html", user_image=full_fname)
+
+
 
 
 def stream_gen(model, url):

@@ -15,6 +15,7 @@ class Streamer:
 
         print('[wandlab] ', 'OpenCL : ', cv2.ocl.haveOpenCL())
 
+        self.img = None
         self.capture = None
         self.thread = None
         self.width = 0
@@ -26,9 +27,38 @@ class Streamer:
         self.Q = Queue(maxsize=128)
         self.started = False
 
+
+    def image_prediction(self, model, url):
+        self.model = model
+        self.url = url
+
+        img_nparr = np.asarray(bytearray(requests.get(self.url).content), dtype=np.uint8)
+        self.img = cv2.imdecode(img_nparr, cv2.IMREAD_COLOR)
+
+        results = self.model(self.img)
+        pred_img = results[0].plot()
+
+        self.filename = str(time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(self.current_time)))
+        self.path = os.getcwd() + "/static/img/" + f"{self.filename}.jpg"
+        self.filename = f"{self.filename}.jpg"
+
+        cv2.imwrite(self.path, pred_img)
+
+        return self.filename
+
+
+    def write_predicted_image(self):
+        results = self.model(self.img)
+        pred_img = results[0].plot()
+        cv2.imwrite(self.path, pred_img)
+        f_name = f"{self.filename}.jpg"
+
+        return self.path, f_name
+
     def pred(self, model, url):
         self.model = model
         self.url = url
+        self.stop_img()
 
         img_nparr = np.asarray(bytearray(requests.get(self.url).content), dtype=np.uint8)
         self.capture = cv2.imdecode(img_nparr, cv2.IMREAD_COLOR)
@@ -80,7 +110,10 @@ class Streamer:
 
     def stop_img(self):
         self.started = False
-        self.clear()
+
+        if self.capture is not None:
+            self.capture = None
+            self.clear()
 
     
     def write_video(self):

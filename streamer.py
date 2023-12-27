@@ -38,22 +38,14 @@ class Streamer:
         results = self.model(self.img)
         pred_img = results[0].plot()
 
-        self.filename = str(time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(self.current_time)))
-        self.path = os.getcwd() + "/static/img/" + f"{self.filename}.jpg"
-        self.filename = f"{self.filename}.jpg"
+        filename = str(time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())))
+        path = os.getcwd() + "/static/img/" + f"{filename}.jpg"
+        filename = f"{filename}.jpg"
 
-        cv2.imwrite(self.path, pred_img)
+        cv2.imwrite(path, pred_img)
 
-        return self.filename
+        return filename
 
-
-    def write_predicted_image(self):
-        results = self.model(self.img)
-        pred_img = results[0].plot()
-        cv2.imwrite(self.path, pred_img)
-        f_name = f"{self.filename}.jpg"
-
-        return self.path, f_name
 
     def pred(self, model, url):
         self.model = model

@@ -58,8 +58,6 @@ def pred_img():
     return render_template("image_predict_page.html", user_image=full_fname)
 
 
-
-
 def stream_gen(model, url):
 
     try:
